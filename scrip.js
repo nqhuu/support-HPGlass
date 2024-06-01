@@ -47,6 +47,7 @@
 let deviceOptions = ['Máy tính', 'Máy quét mã vạch', 'Máy in/intem/photo', 'Tivi', 'Màn hình máy tính', 'bán phí/chuột', 'camera', 'internet'];
 let locationOptions = ['Văn phòng nhà ăn', 'Nhà ăn', 'VP kế toán', 'Lò mountain', 'Lò Fulltime', 'Lò Yuegao', 'Kho VT', 'Kho NL', 'Hộp', 'VP Hôp', 'EI', 'Mài cây tự động', 'Mài cây số 9', 'Mài cây số 10', 'Song cạnh 1-2', 'Song cạnh 3-4', 'Cắt Disai', 'Căt Intermac', 'Truyền dán 1', 'Truyền dán 2', 'Truyền dán 3'];
 let errorDevice = ['Không lên hình', 'Không quét được', 'In lỗi']
+
 let btnAdd = document.querySelector('.btn-add');
 let btnConfirm = document.querySelector('.btn-confirm');
 console.log(btnConfirm);
@@ -60,6 +61,24 @@ let errorBody = document.querySelector('.content-error .error-body')
 console.log(errorBody);
 
 
+// tạo danh sách datalist để liên kết với thuộc tính list của thẻ input
+function createDataList(id, options) {
+    let dataList = document.createElement('datalist');
+    dataList.id = id;
+    options.forEach(option => {
+        let optionElement = document.createElement('option');
+        optionElement.value = option;
+        dataList.appendChild(optionElement);
+    });
+    document.body.appendChild(dataList);
+}
+
+createDataList('deviceOptions', deviceOptions);
+createDataList('locationOptions', locationOptions);
+createDataList('errorDevice', errorDevice);
+
+
+
 // add row và các cell tương ứng
 btnAdd.onclick = function () {
     let errorBodyColum = document.querySelectorAll('.content-error .error-body td')
@@ -71,11 +90,11 @@ btnAdd.onclick = function () {
         if (i === 0) {
             cellAdd.innerHTML = rowCount - 1
         } else if (i === 1) {
-            cellAdd.innerHTML = `<input type="text" placeholder="Thiết bị" required class="input-full-width"></input>`
+            cellAdd.innerHTML = `<input type="text" placeholder="Thiết bị" required list="deviceOptions" class="input-full-width"></input>`
         } else if (i === 2) {
-            cellAdd.innerHTML = `<input type="text" placeholder="Vị trí" required class="input-full-width"></input>`
+            cellAdd.innerHTML = `<input type="text" placeholder="Vị trí" required list="locationOptions" class="input-full-width"></input>`
         } else if (i === 3) {
-            cellAdd.innerHTML = `<input type="text" placeholder="Lỗi" required class="input-full-width"></input>`
+            cellAdd.innerHTML = `<input type="text" placeholder="Lỗi" required list="errorDevice" class="input-full-width"></input>`
         } else if (i === 4) {
             cellAdd.innerHTML = `<input type="text" placeholder="nội dung" class="input-full-width"></input>`
         } else if (i === 5) {
