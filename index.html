@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Support HPGlass</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+    <link rel="stylesheet" href="./assets/css/base.css">
+    <link rel="stylesheet" href="./assets/css/main.css">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap&subset=vietnamese">
+</head>
+
+<body>
+    <div id="header">
+        <img src="./assets/img/logo/logo.png" alt="" class="header__logo">
+        <a href="" class="header__login font-size white text-decoration">Đăng nhập</a>
+    </div>
+    <div id="container">
+        <div id="sidebar_container">
+            <div class="sidebar">
+                <h2 class="sidebar__heading">IT</h2>
+                <ul class="sidebar__menu">
+                    <li class="sidebar__menu__list list-style"><a class="text-decoration" href="">Phần cứng</a></li>
+                    <li class="sidebar__menu__list list-style"><a class="text-decoration" href="">Phần mềm</a></li>
+                </ul>
+            </div>
+            <div class="sidebar">
+                <h2 class="sidebar__heading">Cơ Điện</h2>
+                <ul class="sidebar__menu">
+                    <li class="sidebar__menu__list list-style"><a class="text-decoration" href="">Văn phòng</a></li>
+                    <li class="sidebar__menu__list list-style"><a class="text-decoration" href="">Nhà máy</a></li>
+                </ul>
+            </div>
+        </div>
+        <div id="content">
+            <!-- bảng tạo báo lỗi -->
+            <div class="content-error">
+                <table class="content__table" id="errorTable">
+                    <thead>
+                        <tr class="row">
+                            <td class="colum" data-action="toggleInput">STT</td>
+                            <td class="colum">Thiết bị</td>
+                            <td class="colum">Vị trí</td>
+                            <td class="colum">Lỗi</td>
+                            <td class="colum">Ghi chú</td>
+                            <td class="colum">Hình ảnh</td>
+                        </tr>
+                    </thead>
+                    <tbody class="error-body">
+
+                    </tbody>
+                </table>
+                <div class="btn-error">
+                    <button class="btn btn-add" id="btnAdd">Tạo mới</button>
+                    <button class="btn btn-confirm" id="btnConfirm">Xác nhận</button>
+                </div>
+            </div>
+
+            <!-- bảng hỉnh thị thông tin đã báo lỗi và trạng thái xử lý -->
+            <div class="content-processing">
+                <table class="content__table" id="processingTable">
+                    <tr class="row">
+                        <td class="colum">STT</td>
+                        <td class="colum">Thiết bị</td>
+                        <td class="colum">Vị trí</td>
+                        <td class="colum">Lỗi</td>
+                        <td class="colum">Ghi chú</td>
+                        <td class="colum">Người báo lỗi</td>
+                        <td class="colum">Thời gian báo</td>
+                        <td class="colum">Thời gian hoàn thành</td>
+                        <td class="colum">Trạng thái</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+    <script src="./scrip.js"></script>
+</body>
+
+</html>
