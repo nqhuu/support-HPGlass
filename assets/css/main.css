@@ -72,7 +72,7 @@
 }
 
 #sidebar_container .sidebar .sidebar__heading {
-    padding-bottom: 10px;
+    padding: 0 0 10px 3px;
     font-size: 18px;
     color: rgb(0, 17, 255);
 }
@@ -82,8 +82,16 @@
     font-size: 16px;
 }
 
-#sidebar_container .sidebar__menu__list a {
-    color: #000;
+#sidebar_container .sidebar__menu__list .text-decoration {
+    padding: 2px 5px;
+    min-width: 100px;
+}
+
+#sidebar_container .sidebar__menu__list:hover .text-decoration {
+    color: #ff1919;
+    cursor: pointer;
+    background-color: #e6e6e6;
+
 }
 
 /* table báo lỗi */
@@ -135,8 +143,10 @@
 
 #content .content__table .colum:nth-child(6),
 #content .content__table .colum:nth-child(7),
-#content .content__table .colum:nth-child(8) {
-    width: 13%;
+#content .content__table .colum:nth-child(8),
+#content .content__table .colum:nth-child(9),
+#content .content__table .colum:nth-child(10) {
+    width: 9%;
 
 }
 
