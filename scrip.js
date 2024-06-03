@@ -79,20 +79,15 @@ let deviceOptions = ['Máy tính', 'Máy quét mã vạch', 'Máy in/intem/photo
 let locationOptions = ['Văn phòng nhà ăn', 'Nhà ăn', 'VP kế toán', 'Lò mountain', 'Lò Fulltime', 'Lò Yuegao', 'Kho VT', 'Kho NL', 'Hộp', 'VP Hôp', 'EI', 'Mài cây tự động', 'Mài cây số 9', 'Mài cây số 10', 'Song cạnh 1-2', 'Song cạnh 3-4', 'Cắt Disai', 'Căt Intermac', 'Truyền dán 1', 'Truyền dán 2', 'Truyền dán 3'];
 let errorDevice = ['Không lên hình', 'Không quét được', 'In lỗi']
 
+
 let btnAdd = document.querySelector('.btn-add');
 let btnConfirm = document.querySelector('.btn-confirm');
-// console.log(btnConfirm);
 let errorAll = Array.from(document.querySelectorAll('#content .content-error')) // mảng các bảng lỗi tưng ứng của từng item list
-// console.log(errorAll);
 let sidebarMenuList = Array.from(document.querySelectorAll('#container .sidebar__menu .list-style')) // mảng các item list 
-// console.log(sidebarMenuList);
 // let errorTable = document.querySelector('.content-error .content__table'); // thẻ table
-// console.log(errorTable);
-let processingTale = document.querySelector('.content-processing .content__table');
+let processingTale = document.querySelector ('.content-processing .content__table'); // table hiển thị lỗi đã báo
 let processingColum = document.querySelectorAll('.content-processing .content__table .colum')
-
-let sidebarMenu = document.querySelector('#container .sidebar__menu')
-// console.log(sidebarMenu);
+let sidebarMenu = document.querySelector('#container .sidebar__menu') // list tuỳ chọn
 let errorBodyColum = Array.from(document.querySelectorAll('.content-error .error-body td')); // gọi mảng thẻ td trong tbody - hiện tại là mảng rỗng
 
 
@@ -132,21 +127,22 @@ createDataList('locationOptions', locationOptions);
 createDataList('errorDevice', errorDevice);
 
 // lựa chọn loại thiết bị báo lỗi
-sidebarMenuList.forEach((listError, index) => {
+sidebarMenuList.forEach((listError, index) => { // thẻ li
     let indexList = index;
     listError.onclick = function () {
-        errorAll.forEach((tableError, index) => {
+        errorAll.forEach((tableError, index) => { // thẻ div
             let indextableError = index;
-
+            
             if (indexList === indextableError) {
                 tableError.style.display = 'block'
-
+                console.log(tableError)
+                
                 let errorColum = Array.from(tableError.querySelectorAll('.content-error .content__table td'));
-                console.log(errorColum);
-                let errorTable = document.querySelector('.content-error .content__table'); // thẻ table
-                console.log(errorTable);
-                let errorBody = document.querySelector('.content-error .error-body') // thẻ tbody
-                console.log(errorBody);
+                let errorTable = tableError.querySelector('.content-error .content__table'); // thẻ table
+                let errorBody = tableError.querySelector('.content-error .error-body') // thẻ tbody
+                console.log(errorTable)
+                
+                console.log(errorBody)
                 // thêm hàng cột, xuống thẻ tbody
                 btnAdd.onclick = function () {
                     let newRow = errorBody.insertRow();
@@ -177,11 +173,12 @@ sidebarMenuList.forEach((listError, index) => {
 })
 
 
-// tạo function xử lý ad row và colum
+// tạo function xử lý add row và colum
 
 addContentError = (contentErrorElement) => {
 
 }
 
 
-console.log(document.querySelectorAll('.content-error')); 
+// console.log(document.querySelectorAll('.content-error')); 
+
