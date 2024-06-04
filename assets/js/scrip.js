@@ -75,19 +75,30 @@ let users = [
 ]
 
 
+document.querySelector('#header .header__login').addEventListener('click', function (event) {
+    event.preventDefault();
+    document.querySelector('#overlay').style.display = 'flex'
+})
+
+
+
+
 let deviceOptions = ['Máy tính', 'Máy quét mã vạch', 'Máy in/intem/photo', 'Tivi', 'Màn hình máy tính', 'bán phí/chuột', 'camera', 'internet'];
 let locationOptions = ['Văn phòng nhà ăn', 'Nhà ăn', 'VP kế toán', 'Lò mountain', 'Lò Fulltime', 'Lò Yuegao', 'Kho VT', 'Kho NL', 'Hộp', 'VP Hôp', 'EI', 'Mài cây tự động', 'Mài cây số 9', 'Mài cây số 10', 'Song cạnh 1-2', 'Song cạnh 3-4', 'Cắt Disai', 'Căt Intermac', 'Truyền dán 1', 'Truyền dán 2', 'Truyền dán 3'];
-let errorDevice = ['Không lên hình', 'Không quét được', 'In lỗi']
+let errorDevice = ['Không lên hình', 'Không quét được', 'In lỗi'];
 
 
-let btnAdd = document.querySelector('.btn-add');
-let btnConfirm = document.querySelector('.btn-confirm');
-let errorAll = Array.from(document.querySelectorAll('#content .content-error')) // mảng các bảng lỗi tưng ứng của từng item list
+
+let errorAll = Array.from(document.querySelectorAll('#content .content-error')); // mảng các bảng lỗi tưng ứng của từng item list
+// console.log(errorAll);
+let processingAll = document.querySelector('#content .content-processing'); // bảng tổng xử lý lỗi
+console.log(processingAll);
 let sidebarMenuList = Array.from(document.querySelectorAll('#container .sidebar__menu .list-style')) // mảng các item list 
-// let errorTable = document.querySelector('.content-error .content__table'); // thẻ table
-let processingTale = document.querySelector ('.content-processing .content__table'); // table hiển thị lỗi đã báo
-let processingColum = document.querySelectorAll('.content-processing .content__table .colum')
-let sidebarMenu = document.querySelector('#container .sidebar__menu') // list tuỳ chọn
+let processingTale = processingAll.querySelector('.content__table'); // table hiển thị lỗi đã báo
+console.log(processingTale);
+let processingColum = processingTale.querySelectorAll('.colum');
+let processingBody = processingAll.querySelector('.processing-body') // bảng tbody xử lý lỗi
+let sidebarMenu = document.querySelector('#container .sidebar__menu'); // list tuỳ chọn
 let errorBodyColum = Array.from(document.querySelectorAll('.content-error .error-body td')); // gọi mảng thẻ td trong tbody - hiện tại là mảng rỗng
 
 
@@ -130,25 +141,28 @@ createDataList('errorDevice', errorDevice);
 sidebarMenuList.forEach((listError, index) => { // thẻ li
     let indexList = index;
     listError.onclick = function () {
-        errorAll.forEach((tableError, index) => { // thẻ div
+        errorAll.forEach((divError, index) => { // thẻ div
+
             let indextableError = index;
-            
+            let btnAdd = divError.querySelector('.btn-add');
+            let btnConfirm = divError.querySelector('.btn-confirm');
+
             if (indexList === indextableError) {
-                tableError.style.display = 'block'
-                console.log(tableError)
-                
-                let errorColum = Array.from(tableError.querySelectorAll('.content-error .content__table td'));
-                let errorTable = tableError.querySelector('.content-error .content__table'); // thẻ table
-                let errorBody = tableError.querySelector('.content-error .error-body') // thẻ tbody
-                console.log(errorTable)
-                
-                console.log(errorBody)
+                divError.style.display = 'block'
+                // console.log(divError)
+                let errorColum = Array.from(divError.querySelectorAll('.content__table td'));
+                // console.log(errorColum);
+                let errorTable = divError.querySelector('.content__table'); // thẻ table
+
+                let errorBody = divError.querySelector('.error-body') // thẻ tbody
                 // thêm hàng cột, xuống thẻ tbody
                 btnAdd.onclick = function () {
                     let newRow = errorBody.insertRow();
                     let rowCount = errorTable.rows.length; // trả về leng của hàng tính cả hàng tr và tbody
+                    // console.log(rowCount);
                     for (let i = 0; i < errorColum.length; i++) {
                         let cellAdd = newRow.insertCell(i)
+                        // console.log(cellAdd);
                         if (i === 0) {
                             cellAdd.innerHTML = rowCount - 1
                         } else if (i === 1) {
@@ -162,11 +176,29 @@ sidebarMenuList.forEach((listError, index) => { // thẻ li
                         } else if (i === 5) {
                             cellAdd.innerHTML = `<input type="file" ></input>`
                         }
+                    }
+                }
 
+                // let 
+                btnConfirm.onclick = function () {
+                    let newRowProcessing = processingBody.insertRow();
+                    let rowCountProcessing = processingTale.rows.length;
+
+                    console.log(processingColum.length);
+                    for (let i = 0; i < processingColum.length; i++) {
+                        let cellAddprocessing = newRowProcessing.insertCell(i)
+                        if (i === 0) {
+                            cellAddprocessing = rowCountProcessing - 1;
+                        } if (i > 0) {
+                            // errorBody.forEach()
+                            // for (let j = 1; j < errorColum.length; i++) {
+                            //     cellAddprocessing.innerHTML = 
+                            // }
+                        }
                     }
                 }
             } else {
-                tableError.style.display = 'none'
+                divError.style.display = 'none'
             }
         })
     }
