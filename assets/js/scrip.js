@@ -44,7 +44,7 @@
 // });
 
 
-let users = [
+let account = [
     {
         id: 1,
         user: 'huunq',
@@ -74,28 +74,99 @@ let users = [
     }
 ]
 
+localStorage.setItem('account', JSON.stringify(account)); // chuyển sang dạng JSON với key là account và value được chuyển sang dạng JSON bằng từ khóa setItem và lưu lại trong localStorage
 
-document.querySelector('#header .header__login').addEventListener('click', function (event) {
-    event.preventDefault();
-    document.querySelector('#overlay').style.display = 'flex'
+let deviceOptions = ['Máy tính', 'Máy quét mã vạch', 'Máy in/intem/photo', 'Tivi', 'Màn hình máy tính', 'bán phí/chuột', 'camera', 'internet'];
+let locationOptions = ['Văn phòng nhà ăn', 'Nhà ăn', 'VP kế toán', 'Lò mountain', 'Lò Fulltime', 'Lò Yuegao', 'Kho VT', 'Kho NL', 'Hộp', 'VP Hôp', 'EI', 'Mài cây tự động', 'Mài cây số 9', 'Mài cây số 10', 'Song cạnh 1-2', 'Song cạnh 3-4', 'Cắt Disai', 'Căt Intermac', 'Truyền dán 1', 'Truyền dán 2', 'Truyền dán 3'];
+let errorDevice = ['Không lên hình', 'Không quét được', 'In lỗi'];
+
+// đăng nhập ***************************************************************
+
+
+document.addEventListener('DOMContentLoaded', function () {
+    let headerLogin = document.querySelector('#header .header__login')
+    console.log(headerLogin);
+    if (headerLogin) {
+        headerLogin.addEventListener('click', function (event) {
+            event.preventDefault();
+            document.querySelector('#overlay').style.display = 'flex'
+        })
+
+        document.querySelector('#overlay').addEventListener('click', function (event) {
+            document.querySelector('#overlay').style.display = 'none'
+        })
+    }
+
 })
 
 
 
 
-let deviceOptions = ['Máy tính', 'Máy quét mã vạch', 'Máy in/intem/photo', 'Tivi', 'Màn hình máy tính', 'bán phí/chuột', 'camera', 'internet'];
-let locationOptions = ['Văn phòng nhà ăn', 'Nhà ăn', 'VP kế toán', 'Lò mountain', 'Lò Fulltime', 'Lò Yuegao', 'Kho VT', 'Kho NL', 'Hộp', 'VP Hôp', 'EI', 'Mài cây tự động', 'Mài cây số 9', 'Mài cây số 10', 'Song cạnh 1-2', 'Song cạnh 3-4', 'Cắt Disai', 'Căt Intermac', 'Truyền dán 1', 'Truyền dán 2', 'Truyền dán 3'];
-let errorDevice = ['Không lên hình', 'Không quét được', 'In lỗi'];
+// document.querySelector('.close').addEventListener('click', function () {
+//     document.querySelector('#overlay').style.display = 'none'
+// })
+
+// console.log(document.querySelector('.close'));
+// let userElement = document.querySelector('input[id="username"]');
+// console.log(userElement);
+// let passwordElement = document.querySelector('input[id="password"]');
+// let website = document.querySelector('a[id="webHpg"]')
+// // console.log(website);
+
+// let username = '';
+// userElement.oninput = function (event) {
+//     username = event.target.value;
+//     // console.log(username);
+// }
+
+// let password = '';
+// passwordElement.oninput = function (event) {
+//     password = event.target.value
+//     // console.log(password.length);
+// }
+
+
+
+// let summit = document.querySelector('button')
+// summit.addEventListener('click', function () {
+//     let kq = false;
+//     let checkAccount;
+//     if (username.length === 0 || username.length <= 3) {
+//         alert('Nhập tài khoản có nhiều hơn 3 ký tự')
+//     } else if (username.length > 3) {
+//         if (password.length === 0 || password.length < 8) {
+//             alert('Mật khẩu không được để trống và phải có ít nhất 8 ký tự')
+//         } else {
+//             checkAccount = account.find(item => item.username1 === username && item.password1 === password)
+//             if (checkAccount) {
+//                 console.log('Bạn đã đăng nhập thành công');
+//                 kq = true;
+//             } else {
+//                 alert('Sai tài khoản hoặc mật khẩu')
+//             }
+//         }
+
+//         if (kq) {
+//             window.location.href = website.href;
+//         };
+//     }
+// })
+
+// end đăng nhập----------------------------------
+
+
+
+
 
 
 
 let errorAll = Array.from(document.querySelectorAll('#content .content-error')); // mảng các bảng lỗi tưng ứng của từng item list
 // console.log(errorAll);
 let processingAll = document.querySelector('#content .content-processing'); // bảng tổng xử lý lỗi
-console.log(processingAll);
+// console.log(processingAll);
 let sidebarMenuList = Array.from(document.querySelectorAll('#container .sidebar__menu .list-style')) // mảng các item list 
 let processingTale = processingAll.querySelector('.content__table'); // table hiển thị lỗi đã báo
-console.log(processingTale);
+// console.log(processingTale);
 let processingColum = processingTale.querySelectorAll('.colum');
 let processingBody = processingAll.querySelector('.processing-body') // bảng tbody xử lý lỗi
 let sidebarMenu = document.querySelector('#container .sidebar__menu'); // list tuỳ chọn
@@ -103,7 +174,7 @@ let errorBodyColum = Array.from(document.querySelectorAll('.content-error .error
 
 
 
-// // tạo danh sách datalist để liên kết với thuộc tính list của thẻ input
+// tạo danh sách datalist để liên kết với thuộc tính list của thẻ input
 // function createDataList(id, options) {
 //     let dataList = document.createElement('datalist'); // tạo thêm 1 thẻ datalist vào document được gán cho biến dataList khi gọi về từ document
 //     dataList.id = id; // thêm thuộc tính id với id nhập vào từ hàm createDataList(id,options)
@@ -120,7 +191,7 @@ let errorBodyColum = Array.from(document.querySelectorAll('.content-error .error
 // createDataList('errorDevice', errorDevice);
 
 
-// // tạo danh sách datalist để liên kết với thuộc tính list của thẻ input
+// tạo danh sách datalist để liên kết với thuộc tính list của thẻ input
 
 createDataList = (id, options) => {
     let dataList = document.createElement('datalist');
@@ -184,7 +255,7 @@ sidebarMenuList.forEach((listError, index) => { // thẻ li
                     let newRowProcessing = processingBody.insertRow();
                     let rowCountProcessing = processingTale.rows.length;
 
-                    console.log(processingColum.length);
+                    // console.log(processingColum.length);
                     for (let i = 0; i < processingColum.length; i++) {
                         let cellAddprocessing = newRowProcessing.insertCell(i)
                         if (i === 0) {
@@ -213,4 +284,5 @@ addContentError = (contentErrorElement) => {
 
 
 // console.log(document.querySelectorAll('.content-error')); 
+
 

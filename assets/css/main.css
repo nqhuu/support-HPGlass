@@ -215,4 +215,28 @@
 #overlay {
     width: 100%;
     height: 100%;
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    justify-content: center;
+    align-items: center;
+}
+
+#overlay .overlay-iframe {
+    width: 300px;
+    height: 300px;
+}
+
+
+.style-Login {
+    flex-direction: column;
+    z-index: 2;
+    box-shadow: 5px 15px 15px rgba(0, 0, 0, 0.3);
+}
+
+.show-login {
+    display: flex;
+
 }
